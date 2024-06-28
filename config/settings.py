@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5z+77^t1iruou5=y=u@zyquy0&a2r)%apk0sl#&m0+6^htxm_i'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'ahhjdbsccbcjinkjcn')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = int(os.getenv('DEBUG', True))
 
 ALLOWED_HOSTS = ['*']
 
@@ -80,11 +84,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "dilnavoz_moose",
-        "USER": "doadmin",
-        "PASSWORD": "AVNS_feJOFOu7KkwbdfMc3JX",
-        "HOST": "do-db-do-user-16947834-0.c.db.ondigitalocean.com",
-        "PORT": "25060",
+        "NAME": os.getenv('DB_NAME'),
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "HOST": os.getenv('DB_HOST'),
+        "PORT": os.getenv('DB_PORT'),
     }
 }
 
